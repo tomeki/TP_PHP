@@ -23,14 +23,15 @@ class PageRulesNatAdd extends Structure {
         <div class="alert alert-warning" role="alert">
           Attention à la règle que vous ajoutez !
         </div>
-       <form action="validate_rules_nat_add.php" method="POST">
+       <form action="validate_rules_nat_add.php" method="POST" id="new_nat">
           <div class="form-group">
             <label for="formNameInput">Nom de la règle</label>
             <input type="text" class="form-control" id="formNameInput" placeholder="Nom de la règle de Nat" name="name">
           </div>
           <div class="form-group">
             <label for="formTypeSelect">Type</label><br>
-            <select id="formTypeSelect" form="carform">
+            <select id="formTypeSelect" class="form-control" form="new_nat" name="type_option">
+            <option value="vide">----</option>
               <option value="Source NAT">Source NAT</option>
               <option value="Destination NAT">Destination NAT</option>
             </select>
@@ -43,12 +44,10 @@ class PageRulesNatAdd extends Structure {
             <label for="formPortInput">Port</label>
             <input type="text" class="form-control" id="formPortInput" placeholder="Port" name="port">
           </div>
-          <button type="submit" class="btn btn-primary">Ajouter la règle</button>
+          <button type="submit" name="submit" class="btn btn-primary">Ajouter la règle</button>
         </form>
         <?php
     }
-
-
 
 }
 $page = new PageRulesNatAdd();

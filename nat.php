@@ -8,7 +8,7 @@ private $_managementNat = null;
 
 public function __construct(){
     parent::__construct();
-    $this->initializeNat();
+    $this->initializeNat("test","10.0.0.0",12,"type");
     $this->setActiveLink('Règles NAT');
 
 }
@@ -17,9 +17,9 @@ protected function buildHTMLHead() {
     //echo '<link rel="stylesheet" type="text/css" href="css\alias.css" media="all" />';
 }
 
-private function initializeNat() {
+private function initializeNat($aNom, $anIp,$aPort,$aType) {
     $this->_managementNat = new ManagementNat();
-    $this->_managementNat->addRule('NOM1', '10.0.0.1',22,"type" );
+    $this->_managementNat->addRule($aNom, $anIp,$aPort,$aType);
     }
 
     public function buildContent() {

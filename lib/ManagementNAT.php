@@ -8,6 +8,7 @@ class ManagementNat {
 	private $_listRule;
 
 	public function addRule($aName,$anIp,$aPort,$aType){
+		
 		$Rule = new Rule_Nat();
         $Rule->setName($aName);
         $Rule->setIP($anIp);
