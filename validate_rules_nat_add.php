@@ -16,14 +16,14 @@ class PageRulesNatAdd extends Structure {
     protected function buildHTMLHead() {
         parent::buildHTMLHead();
        // echo '<link rel="stylesheet" type="text/css" href="css\alias.css" media="all" />';
-       echo"<meta http-equiv='refresh' content='3;URL=http://localhost/TP_PHP/rules_nat_add.php'>";
+       echo"<meta http-equiv='refresh' content='2;URL=http://localhost/TP_PHP/rules_nat_add.php'>";
     }
 
 
     public function buildContent() {
-        if(isset($_POST["name"]) && isset($_POST["type_option"]) && ($_POST["type_option"])!="vide" && isset($_POST["ip"]) && isset($_POST["port"])){
+        if(isset($_POST["name_option"]) && isset($_POST["type_option"]) && ($_POST["type_option"])!="vide" && isset($_POST["ip"]) && isset($_POST["port"])){
             $this->_managementNat = new ManagementNat();
-            $this->_managementNat->addRule($_POST["name"],$_POST["ip"],$_POST["port"],$_POST["type_option"]);
+            $this->_managementNat->addRule($_POST["name_option"],$_POST["ip"],$_POST["port"],$_POST["type_option"]);
            
         ?>
         <div class="alert alert-warning" role="alert">

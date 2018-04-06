@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Ven 06 Avril 2018 à 13:14
+-- Généré le :  Ven 06 Avril 2018 à 15:32
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -38,7 +38,8 @@ CREATE TABLE `alias` (
 --
 
 INSERT INTO `alias` (`idAlias`, `name`, `ip`, `port`) VALUES
-(1, 'WebServer1-SSH', '10.1.0.1', 22);
+(3, 'monAlias', '10.0.0.5', 80),
+(4, 'monAlias2', '10.0.0.5', 80);
 
 -- --------------------------------------------------------
 
@@ -56,14 +57,6 @@ CREATE TABLE `firewall` (
   `state` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `firewall`
---
-
-INSERT INTO `firewall` (`id`, `name`, `ip_src`, `port_src`, `ip_dest`, `port_dest`, `state`) VALUES
-(1, 'nom', '10.0.0.1', 80, '10.0.0.4', 80, 'Actif'),
-(2, 'nom', '10.0.0.1', 22, '195.125.2.2', 22, 'active');
-
 -- --------------------------------------------------------
 
 --
@@ -72,7 +65,8 @@ INSERT INTO `firewall` (`id`, `name`, `ip_src`, `port_src`, `ip_dest`, `port_des
 
 CREATE TABLE `nat` (
   `id` int(10) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `id_alias` int(10) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `ip` varchar(18) NOT NULL,
   `port` int(10) NOT NULL,
   `type` varchar(30) NOT NULL
@@ -82,9 +76,9 @@ CREATE TABLE `nat` (
 -- Contenu de la table `nat`
 --
 
-INSERT INTO `nat` (`id`, `name`, `ip`, `port`, `type`) VALUES
-(1, 'test_nom', '10.0.0.1', 80, 'Source NAT'),
-(2, 'Regle NAT TEST', '190.0.0.1', 90, 'Source NAT');
+INSERT INTO `nat` (`id`, `id_alias`, `name`, `ip`, `port`, `type`) VALUES
+(12, 3, 'monAlias', '10.0.0.5', 80, 'Source NAT'),
+(13, 4, 'monAlias2', '10.5.5.2', 80, 'Destination NAT');
 
 --
 -- Index pour les tables exportées
@@ -106,7 +100,8 @@ ALTER TABLE `firewall`
 -- Index pour la table `nat`
 --
 ALTER TABLE `nat`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_alias` (`id_alias`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -116,17 +111,27 @@ ALTER TABLE `nat`
 -- AUTO_INCREMENT pour la table `alias`
 --
 ALTER TABLE `alias`
-  MODIFY `idAlias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idAlias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `firewall`
 --
 ALTER TABLE `firewall`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `nat`
 --
 ALTER TABLE `nat`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `nat`
+--
+ALTER TABLE `nat`
+  ADD CONSTRAINT `fk_id_alias` FOREIGN KEY (`id_alias`) REFERENCES `alias` (`idAlias`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -8,7 +8,6 @@ class ManagementAlias {
 
     public function addAlias($anIP, $aPort, $aName) {
         require('pdo.php');
-
         $Alias = new Alias();
         $Alias->setName($aName);
         $Alias->setIP($anIP);
@@ -18,7 +17,7 @@ class ManagementAlias {
         //AJOUT A LA BASE DE DONNES
         $stmt = $bdd->prepare("INSERT INTO alias (name, ip, port) VALUES (:name, :ip, :port)");
 		$stmt->bindParam(':name', $aName);
-		$stmt->bindParam(':ip', $anIp);
+		$stmt->bindParam(':ip', $anIP);
 		$stmt->bindParam(':port', $aPort);
 		$stmt->execute();
 

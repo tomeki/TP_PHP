@@ -16,7 +16,7 @@ class PageRulesFirewallAdd extends Structure {
     protected function buildHTMLHead() {
         parent::buildHTMLHead();
        // echo '<link rel="stylesheet" type="text/css" href="css\alias.css" media="all" />';
-       echo"<meta http-equiv='refresh' content='3;URL=http://localhost/TP_PHP/rules_filter_add.php'>";
+       echo"<meta http-equiv='refresh' content='2;URL=http://localhost/TP_PHP/rules_filter_add.php'>";
     }
 
 

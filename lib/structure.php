@@ -27,6 +27,7 @@ abstract class Structure {
     $this->_menu->addItem("Alias", "alias.php");
     $this->_menu->addItem("Règles NAT", "nat.php");
     $this->_menu->addItem("Règles Filtrage", "firewall.php");
+    $this->_menu->addItem("Ajout Alias", "alias_add.php");
     $this->_menu->addItem("Ajout règle NAT", "rules_nat_add.php");
     $this->_menu->addItem("Ajout règle Filtrage", "rules_filter_add.php");
     $this->_menu->addItem("Générer règle NAT", "rules_nat_generate.php");

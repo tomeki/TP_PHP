@@ -19,14 +19,28 @@ class PageRulesNatAdd extends Structure {
 
 
     public function buildContent() {
+      require('/lib/pdo.php');
+
         ?>
         <div class="alert alert-warning" role="alert">
           Attention à la règle que vous ajoutez !
         </div>
        <form action="validate_rules_nat_add.php" method="POST" id="new_nat">
           <div class="form-group">
-            <label for="formNameInput">Nom de la règle</label>
-            <input type="text" class="form-control" id="formNameInput" placeholder="Nom de la règle de Nat" name="name">
+            <label for="formNameSelect">Nom de la règle</label>
+            <select id="formNameSelect" class="form-control" form="new_nat" name="name_option">
+            <option value="vide">----</option>
+            <?php
+               $resultats=$bdd->query("SELECT * FROM alias");
+           while( $resultat = $resultats->fetch() )
+           {
+           ?>
+               <option><?php echo $resultat["name"]; ?></option>
+           <?php
+           }
+           $resultats->closeCursor();
+            ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="formTypeSelect">Type</label><br>
