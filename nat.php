@@ -19,7 +19,7 @@ protected function buildHTMLHead() {
 
 private function initializeNat($aNom, $anIp,$aPort,$aType) {
     $this->_managementNat = new ManagementNat();
-    $this->_managementNat->addRule($aNom, $anIp,$aPort,$aType);
+   // $this->_managementNat->addRule($aNom, $anIp,$aPort,$aType);
     }
 
     public function buildContent() {

@@ -8,6 +8,7 @@ class ManagementFirewall {
 
 
 	public function addFirewall($aName, $aSrcIp, $aSrcPort, $anIpDest, $aPortDest, $aState){
+		require('pdo.php');
 		$Firewall = new Rules_Filter();
 		$Firewall->setName($aName);
         $Firewall->setIPSource($aSrcIp);
@@ -15,7 +16,17 @@ class ManagementFirewall {
         $Firewall->setPortSource($aSrcPort);
         $Firewall->setPortDest($aPortDest);
         $Firewall->setState($aState);
-        $this->_listFirewall[] = $Firewall;
+		$this->_listFirewall[] = $Firewall;
+
+		//AJOUT A LA BASE DE DONNES
+		$stmt = $bdd->prepare("INSERT INTO firewall (name, ip_src, port_src, ip_dest, port_dest, state) VALUES (:aName, :aSrcIp, :aSrcPort, :anIpDest, :aPortDest, :aState)");
+		$stmt->bindParam(':aName', $aName);
+		$stmt->bindParam(':aSrcIp', $aSrcIp);
+		$stmt->bindParam(':aSrcPort', $aSrcPort);
+		$stmt->bindParam(':anIpDest', $anIpDest);
+		$stmt->bindParam(':aPortDest', $aPortDest);
+		$stmt->bindParam(':aState', $aState);
+		$stmt->execute();
 
 	}
 
@@ -48,8 +59,26 @@ class ManagementFirewall {
 	}*/
 
 	public function buildFirewallToHTML() {
-        foreach ($this->_listFirewall as $Firewall) {
-            ?>
+
+		require('pdo.php');
+        //foreach ($this->_listFirewall as $Firewall) {
+		$resultats=$bdd->query("SELECT * FROM firewall");
+		while( $resultat = $resultats->fetch() )
+		{
+		?>
+		
+			<tr>
+				<td><?php echo $resultat["name"]; ?></td>
+				<td><?php echo $resultat["ip_src"]; ?></td>
+				<td><?php echo $resultat["port_src"]; ?></td>
+				<td><?php echo $resultat["ip_dest"]; ?></td>
+				<td><?php echo $resultat["port_dest"]; ?></td>
+				<td><?php echo $resultat["state"]; ?></td>
+			</tr>
+		<?php
+		}
+		$resultats->closeCursor();
+		/*
             <tr>
                 <td><?php echo $Firewall->getName(); ?></td>
                 <td><?php echo $Firewall->getIPSource(); ?></td>
@@ -57,10 +86,10 @@ class ManagementFirewall {
 				<td><?php echo $Firewall->getIPDest(); ?></td>
                 <td><?php echo $Firewall->getPortDest(); ?></td>
                 <td><?php echo $Firewall->getState(); ?></td>
-            </tr>
+            </tr> */?>
             <?php  
-        }
-    }
+        
+	}
 }
 
 ?>

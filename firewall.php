@@ -19,7 +19,7 @@ class PageFirewall extends Structure{
     }
     private function initializeFirewall() {
         $this->_ManagementFirewall = new ManagementFirewall();
-        $this->_ManagementFirewall->addFirewall('nom', "10.0.0.1",22,"195.125.2.2",22,"active");
+       // $this->_ManagementFirewall->addFirewall('nom', "10.0.0.1",22,"195.125.2.2",22,"active");
     }
 
     public function buildContent() {

@@ -18,10 +18,10 @@ class ManagementNat {
 		
 		//AJOUT A LA BASE DE DONNES
 		$stmt = $bdd->prepare("INSERT INTO nat (name, ip, port,type) VALUES (:name, :ip, :port, :type)");
-		$stmt->bindParam(':name', $_POST["name"]);
-		$stmt->bindParam(':ip', $_POST["ip"]);
-		$stmt->bindParam(':port', $_POST["port"]);
-		$stmt->bindParam(':type', $_POST["type_option"]);
+		$stmt->bindParam(':name', $aName);
+		$stmt->bindParam(':ip', $anIp);
+		$stmt->bindParam(':port', $aPort);
+		$stmt->bindParam(':type', $aType);
 		$stmt->execute();
 
 	}
@@ -48,19 +48,20 @@ class ManagementNat {
 	public function buildRuleToHTML() {
 		require('pdo.php');
        // foreach ($this->_listRule as $rule) {
-			$resultats=$bdd->query("SELECT * FROM nat");
-			while( $resultat = $resultats->fetch() )
-			{
-			?>
-				<tr>
-					<td><?php echo $resultat["name"]; ?></td>
-					<td><?php echo $resultat["ip"]; ?></td>
-					<td><?php echo $resultat["port"]; ?></td>
-					<td><?php echo $resultat["type"]; ?></td>
-				</tr>
-			<?php
+		$resultats=$bdd->query("SELECT * FROM nat");
+		while( $resultat = $resultats->fetch() )
+		{
+		?>
+			<tr>
+				<td><?php echo $resultat["name"]; ?></td>
+				<td><?php echo $resultat["ip"]; ?></td>
+				<td><?php echo $resultat["port"]; ?></td>
+				<td><?php echo $resultat["type"]; ?></td>
+			</tr>
+		<?php
+		}
 			//}
-			$resultats->closeCursor();
+		$resultats->closeCursor();
            /* ?>
             <tr>
 			
@@ -70,7 +71,7 @@ class ManagementNat {
 				<td><?php echo $rule->getType(); ?></td>
             </tr>
             <?php  */
-        }
+        
     }
 }
 

@@ -4,7 +4,7 @@ require_once (dirname(__FILE__) . '/lib/structure.php');
 require_once (dirname(__FILE__) . '/lib/ManagementNAT.php');
 
 class PageRulesNatAdd extends Structure {
-    private $_managementAlias = null;
+    private $_managementNat = null;
 
     
     public function __construct() {

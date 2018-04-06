@@ -2,6 +2,9 @@
     background-color: #DEC049 !important;
     border-color: #E7E7E7;
 }
+#button_new_alias p{
+  text-align:center;
+}
 li.logo {
     width: 60px;
 }

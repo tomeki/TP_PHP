@@ -20,8 +20,7 @@ class PageAlias extends Structure {
 
     private function initializeAlias() {
         $this->_managementAlias = new ManagementAlias();
-        $this->_managementAlias->addAlias('10.0.0.1', 22,'WebServer-1-SSH');
-        $this->_managementAlias->addAlias('10.0.0.2', 80,'WebServer-2-HTTP');
+       // $this->_managementAlias->addAlias('10.0.0.1', 22,'WebServer-1-SSH');
     }
 
     public function buildContent() {
@@ -41,6 +40,41 @@ class PageAlias extends Structure {
                 <?php $this->_managementAlias->buildAliasToHTML(); ?> 
             </tbody>
         </table>
+        <button  type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Ajouter un alias</button>
+            
+        <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ajout d'un alias</h4>
+      </div>
+      <div class="modal-body">
+        <form action="validate_alias_add.php" method="POST" id="new_alias">
+            <div class="form-group">
+                <label for="formNameInput">Nom de l'alias</label>
+                <input type="text" class="form-control" id="formNameInput" placeholder="Nom d'alias" name="name">
+            </div>
+            <div class="form-group">
+                <label for="formAdresseIPInput">Adresse IP</label>
+                <input type="text" class="form-control" id="formAdresseIPInput" placeholder="Adresse IP" name="ip">
+            </div>
+            <div class="form-group">
+                <label for="formPortInput">Port</label>
+                <input type="text" class="form-control" id="formPortInput" placeholder="Port" name="port">
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Ajouter l'alias</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+
+  </div>
+</div>
         <?php
     }
 
