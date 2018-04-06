@@ -42,9 +42,8 @@ class PageAlias extends Structure {
         </table>
         <button  type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Ajouter un alias</button>
             
-        <div id="myModal" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
