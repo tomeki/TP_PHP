@@ -23,6 +23,7 @@ private function initializeNat($aNom, $anIp,$aPort,$aType) {
     }
 
     public function buildContent() {
+        require('/lib/pdo.php');
         ?>
         <p>
             Voici la liste des règles du système :
@@ -37,7 +38,7 @@ private function initializeNat($aNom, $anIp,$aPort,$aType) {
                 </tr>
             </thead>
             <tbody>
-                <?php $this->_managementNat->buildRuleToHTML(); ?> 
+                <?php $this->_managementNat->buildRuleToHTML();  ?>
             </tbody>
         </table>
         <?php

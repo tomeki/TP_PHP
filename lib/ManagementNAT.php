@@ -8,13 +8,21 @@ class ManagementNat {
 	private $_listRule;
 
 	public function addRule($aName,$anIp,$aPort,$aType){
-		
+		require('pdo.php');
 		$Rule = new Rule_Nat();
         $Rule->setName($aName);
         $Rule->setIP($anIp);
 		$Rule->setPort($aPort);
 		$Rule->setType($aType);
 		$this->_listRule[] = $Rule;
+		
+		//AJOUT A LA BASE DE DONNES
+		$stmt = $bdd->prepare("INSERT INTO nat (name, ip, port,type) VALUES (:name, :ip, :port, :type)");
+		$stmt->bindParam(':name', $_POST["name"]);
+		$stmt->bindParam(':ip', $_POST["ip"]);
+		$stmt->bindParam(':port', $_POST["port"]);
+		$stmt->bindParam(':type', $_POST["type_option"]);
+		$stmt->execute();
 
 	}
 
@@ -38,15 +46,30 @@ class ManagementNat {
 
 
 	public function buildRuleToHTML() {
-        foreach ($this->_listRule as $rule) {
-            ?>
+		require('pdo.php');
+       // foreach ($this->_listRule as $rule) {
+			$resultats=$bdd->query("SELECT * FROM nat");
+			while( $resultat = $resultats->fetch() )
+			{
+			?>
+				<tr>
+					<td><?php echo $resultat["name"]; ?></td>
+					<td><?php echo $resultat["ip"]; ?></td>
+					<td><?php echo $resultat["port"]; ?></td>
+					<td><?php echo $resultat["type"]; ?></td>
+				</tr>
+			<?php
+			//}
+			$resultats->closeCursor();
+           /* ?>
             <tr>
+			
                 <td><?php echo $rule->getName(); ?></td>
                 <td><?php echo $rule->getIP(); ?></td>
                 <td><?php echo $rule->getPort(); ?></td>
 				<td><?php echo $rule->getType(); ?></td>
             </tr>
-            <?php  
+            <?php  */
         }
     }
 }
